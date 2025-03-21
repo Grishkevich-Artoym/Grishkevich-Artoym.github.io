@@ -101,8 +101,7 @@
         <h2 class="section-title animate" data-key="experienceTitle">Опыт работы</h2>
         <div class="experience-container animate">
             <div class="experience-badge">
-                <div class="experience-number">7+</div>
-                <div class="experience-text" data-key="years">лет опыта</div>
+                <div class="experience-text" data-key="years">Большой опыт работы</div>
             </div>
             <div class="skills-list">
                 <h3 data-key="expertise">Основные технологии:</h3>
@@ -177,36 +176,13 @@
         <p data-key="footerText">© 2023 Артём Гришкевич. Все права защищены.</p>
     </footer>
 
-    <!-- EmailJS Script -->
+    <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
-        // Инициализация EmailJS
         emailjs.init('ULztas2Zh_seeHljo');
-        
-        // Обработка формы
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const submitBtn = this.querySelector('button[type="submit"]');
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Отправка...';
-
-            emailjs.sendForm('service_xwk4jzr', 'template_soglh2w', this)
-                .then(() => {
-                    alert('Сообщение успешно отправлено!');
-                    this.reset();
-                })
-                .catch((error) => {
-                    alert('Ошибка: ' + error.text);
-                })
-                .finally(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Отправить';
-                });
-        });
     </script>
     
     <!-- Основной скрипт -->
     <script src="js/script.js"></script>
 </body>
-</html>
+                    </html>
