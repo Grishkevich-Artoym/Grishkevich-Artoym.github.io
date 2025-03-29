@@ -78,11 +78,55 @@ const initParticles = () => {
 
 // Language System
 const translations = {
-    ru: {
-        // ... (ru translations)
+    ru: {logo: "Артём Гришкевич",
+        home: "Главная",
+        services: "Услуги",
+        skills: "Навыки",
+        experience: "Опыт",
+        contact: "Контакты",
+        heroTitle: "Профессиональный веб-разработчик",
+        heroSub: "Создаю современные решения для цифрового мира",
+        heroBtn: "Обсудить проект",
+        servicesTitle: "Услуги",
+        service1Title: "🚀 Разработка сайтов",
+        service1List: ["Полный цикл разработки", "Индивидуальный дизайн", "Адаптивная верстка"],
+        service2Title: "🎨 Веб-дизайн",
+        service2List: ["UI/UX проектирование", "Анимации и интерактив", "Оптимизация скорости"],
+        skillsTitle: "Навыки",
+        experienceTitle: "Опыт работы",
+        years: "Большой опыт работы",
+        expertise: "Основные технологии:",
+        contactTitle: "Контакты",
+        formName: "Ваше имя",
+        formEmail: "Ваш email",
+        formMessage: "Сообщение",
+        formButton: "Отправить",
+        footerText: "© 2023 Артём Гришкевич. Все права защищены."
     },
-    en: {
-        // ... (en translations)
+    en: {logo: "Artem Grishkevich",
+        home: "Home",
+        services: "Services",
+        skills: "Skills",
+        experience: "Experience",
+        contact: "Contact",
+        heroTitle: "Professional Web Developer",
+        heroSub: "Creating modern digital solutions",
+        heroBtn: "Discuss Project",
+        servicesTitle: "Services",
+        service1Title: "🚀 Web Development",
+        service1List: ["Full-cycle development", "Custom design", "Responsive layout"],
+        service2Title: "🎨 Web Design",
+        service2List: ["UI/UX Design", "Animations & Interactions", "Speed Optimization"],
+        skillsTitle: "Skills",
+        experienceTitle: "Work Experience",
+        years: "Extensive work experience",
+        expertise: "Core Technologies:",
+        contactTitle: "Contact",
+        formName: "Your Name",
+        formEmail: "Your Email",
+        formMessage: "Message",
+        formButton: "Send",
+        footerText: "© 2023 Artem Grishkevich. All rights reserved."
     }
 };
 
@@ -146,5 +190,53 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
             submitBtn.textContent = translations[currentLang]?.formButton || 'Send';
         });
 });
+// Mobile Menu
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+menuToggle?.addEventListener('click', () => navLinks.classList.toggle('active'));
 
-// ... (остальной код без изменений)
+// Custom Cursor
+const initCursor = () => {
+    const cursor = document.createElement('div');
+    cursor.className = 'custom-cursor';
+    document.body.appendChild(cursor);
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+    document.querySelectorAll('a, button, input, .skill-tag').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('cursor-active'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('cursor-active'));
+    });
+};
+
+// Initialize Components
+document.addEventListener('DOMContentLoaded', () => {
+    initParticles();
+    initCursor();
+    translatePage(currentLang);
+    
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    // Close Mobile Menu
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-links') && !e.target.closest('.menu-toggle')) {
+            navLinks?.classList.remove('active');
+        }
+    });
+});
+
+// Window Resize Handler
+window.addEventListener('resize', () => {
+    const canvas = document.getElementById('particlesCanvas');
+    if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+});
